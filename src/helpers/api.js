@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Platform } from 'react-native';
 import { storeData } from './functions';
-export const endPoint = 'https://api.agstribe.org/api/v1';
+export const endPoint = 'https://api.herconomy.com/api/v1';
 //export const endPoint = 'https://stagging.agstribe.org/api/v1';
 // export const base_ql_url = "https://socket-staging.agstribe.org/graphql"
 // export const base_ql_http = "https://socket-staging.agstribe.org"
