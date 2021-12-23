@@ -14,6 +14,7 @@ import Groups from './groups/group';
 import { TouchableNativeFeedback, TouchableOpacity } from 'react-native-gesture-handler';
 import Notify from './notify';
 import { FONTSIZE } from '../../../helpers/constants';
+import Modaltour from './Modal';
 
 const Home = props => {
   const {user, token,msg_senders} = useStoreState(state => ({
@@ -136,6 +137,8 @@ const Home = props => {
     }, []),
   );
 
+ 
+
   useEffect(()=>{
     OneSignal.init('966e14a3-0f0a-4c35-8eb3-0e12324b3795', {
       kOSSettingsKeyAutoPrompt: false,
@@ -145,6 +148,7 @@ const Home = props => {
     OneSignal.inFocusDisplaying(0);
     OneSignal.addEventListener('received', onReceived);
     OneSignal.addEventListener('opened', onOpened);
+
     OneSignal.addEventListener('ids', onIds);
     if(!notify_id){
       updateNotificationId({});
@@ -153,8 +157,17 @@ const Home = props => {
     }
   },[])
 
+
+
+
   return (
     <React.Fragment>
+
+     
+          <Modaltour   />
+
+
+
             {
               notify_id ? (
                   <Notify props={props} notification_id={notify_id} setNotify={setNotify}/>
