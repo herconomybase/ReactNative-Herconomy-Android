@@ -17,6 +17,8 @@ import IonNotification from 'react-native-vector-icons/Feather';
 import IonOpportunities from 'react-native-vector-icons/FontAwesome';
 import IonAdd from 'react-native-vector-icons/Ionicons';
 import IonSavings from 'react-native-vector-icons/Fontisto';
+import Orientation from 'react-native-orientation';
+
 
 const Modaltour = () => {
 
@@ -26,7 +28,11 @@ const Modaltour = () => {
   const [modalnumber2, setModalnumber2] = useState(0);
 
 
-  
+  console.log(Orientation.getInitialOrientation);
+ useEffect(() => {
+        Orientation.lockToPortrait()
+ },[])
+
 
   return (
     <View>
@@ -41,7 +47,8 @@ const Modaltour = () => {
           <ImageBackground
              source={require('../../../../assets/img/tourscreen.png')}
             style={styles.imagetour}
-            imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}>
+             imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}
+            >
             <View style={styles.login2}>
               <View
                 style={{
@@ -59,13 +66,16 @@ const Modaltour = () => {
 
               <View style={styles.modalText}>
                 <Text style={styles.modaltextStyle2}>
-                  Tap here to see menu features
+                  Tap here to see menu featuresi
                 </Text>
               </View>
               <View style={styles.modalbutton}>
-                <Pressable
+              <Pressable
                   style={styles.buttonskip}
-                  onPress={() => setModalVisible(false)}>
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible(false)
+                  }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
                 <Pressable
@@ -115,11 +125,14 @@ const Modaltour = () => {
                   </Text>
                 </View>
                 <View style={styles.modalbutton}>
-                  <Pressable
-                    style={styles.buttonskip}
-                    onPress={() => setModalVisible(false)}>
-                    <Text style={styles.buttonskipText}>Skip</Text>
-                  </Pressable>
+                <Pressable
+                  style={styles.buttonskip}
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible(false)
+                  }}>
+                  <Text style={styles.buttonskipText}>Skip</Text>
+                </Pressable>
                   <Pressable
                     style={styles.buttonGotIt}
                     onPress={() => {
@@ -168,11 +181,14 @@ const Modaltour = () => {
                   </Text>
                 </View>
                 <View style={styles.modalbutton}>
-                  <Pressable
-                    style={styles.buttonskip}
-                    onPress={() => setModalVisible(false)}>
-                    <Text style={styles.buttonskipText}>Skip</Text>
-                  </Pressable>
+                <Pressable
+                  style={styles.buttonskip}
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible(false)
+                  }}>
+                  <Text style={styles.buttonskipText}>Skip</Text>
+                </Pressable>
                   <Pressable
                     style={styles.buttonGotIt}
                     onPress={() => {
@@ -217,11 +233,14 @@ const Modaltour = () => {
                   </Text>
                 </View>
                 <View style={styles.modalbutton}>
-                  <Pressable
-                    style={styles.buttonskip}
-                    onPress={() => setModalVisible2(false)}>
-                    <Text style={styles.buttonskipText}>Skip</Text>
-                  </Pressable>
+                <Pressable
+                  style={styles.buttonskip}
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible2(false)
+                  }}>
+                  <Text style={styles.buttonskipText}>Skip</Text>
+                </Pressable>
                   <Pressable
                     style={styles.buttonGotIt}
                     onPress={() => {
@@ -271,11 +290,14 @@ const Modaltour = () => {
                   </Text>
                 </View>
                 <View style={styles.modalbutton}>
-                  <Pressable
-                    style={styles.buttonskip}
-                    onPress={() => setModalVisible2(false)}>
-                    <Text style={styles.buttonskipText}>Skip</Text>
-                  </Pressable>
+                <Pressable
+                  style={styles.buttonskip}
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible2(false)
+                  }}>
+                  <Text style={styles.buttonskipText}>Skip</Text>
+                </Pressable>
                   <Pressable
                     style={styles.buttonGotIt}
                     onPress={() => {
@@ -325,11 +347,14 @@ const Modaltour = () => {
                   </Text>
                 </View>
                 <View style={styles.modalbutton}>
-                  <Pressable
-                    style={styles.buttonskip}
-                    onPress={() => setModalVisible2(false)}>
-                    <Text style={styles.buttonskipText}>Skip</Text>
-                  </Pressable>
+                <Pressable
+                  style={styles.buttonskip}
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible2(false)
+                  }}>
+                  <Text style={styles.buttonskipText}>Skip</Text>
+                </Pressable>
                   <Pressable
                     style={styles.buttonGotIt}
                     onPress={() => {
@@ -379,11 +404,14 @@ const Modaltour = () => {
                   </Text>
                 </View>
                 <View style={styles.modalbutton}>
-                  <Pressable
-                    style={styles.buttonskip}
-                    onPress={() => setModalVisible2(false)}>
-                    <Text style={styles.buttonskipText}>Skip</Text>
-                  </Pressable>
+                <Pressable
+                  style={styles.buttonskip}
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible2(false)
+                  }}>
+                  <Text style={styles.buttonskipText}>Skip</Text>
+                </Pressable>
                   <Pressable
                     style={styles.buttonGotIt}
                     onPress={() => {

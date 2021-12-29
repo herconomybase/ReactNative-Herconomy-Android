@@ -829,6 +829,15 @@ export const WellDone = ({setShow,text,onPressD,btn_text}) => {
 
 export const AddMoney = ({setSendPlan,setShow,type,target_amt,hide_wallet_option,current_index,reload,
   tab_name}) => {
+    // console.log('setSendPlan',setSendPlan)
+    // console.log('setShow', setShow)
+    // console.log('type', type)
+    // console.log('target_amt',target_amt)
+    // console.log('hide_wallet_option', hide_wallet_option);
+    // console.log("current_index",current_index);
+    // console.log('reload',reload);
+    // console.log('tab_name',tab_name);
+console.log("Add Money Component");
   const [plans,setPlans] = React.useState([]);
   const [showList,setShowList] = useState("select plan");
   const [loading,setLoading] = React.useState(false);
@@ -1016,6 +1025,7 @@ export const AddMoney = ({setSendPlan,setShow,type,target_amt,hide_wallet_option
   },[])
   return(
       <React.Fragment>
+        {console.log('showlist',showList)}
         {
             showList === "select plan" ? (
               <SelectPlan 
@@ -1059,6 +1069,8 @@ const PaymentMethods = ({setShowList,destination,type,amount,setShow,hide_wallet
   const [loading,setLoading] = useState(false);
   const [done,setDone] = useState(false);
   const [gql_user,setGqlUser] = useState(null)
+  console.log("setShowList for savings",setShowList)
+  console.log(amount)
 
   const fetchData = async () => {
     try{
@@ -1161,6 +1173,7 @@ const PaymentMethods = ({setShowList,destination,type,amount,setShow,hide_wallet
 
 const transactionHandler = async (data) => {
     //setLoading(false);
+
     var webResponse = JSON.parse(data);
     setShowModal(false);
     switch (
@@ -1168,6 +1181,7 @@ const transactionHandler = async (data) => {
     ) {
       case 'USER_CANCELLED':
         {
+          // {console.log("switch transaction",webResponse.message)}
           setShowModal(false);
         }
         break;
@@ -1194,6 +1208,7 @@ const transactionHandler = async (data) => {
       }
     }
   }
+  {"hide_wallet",hide_wallet, "destination id", destination.id}
   let options = !hide_wallet && destination && destination.id !== null ?  [
     {
       label : "Use Bank Card",
@@ -1802,6 +1817,12 @@ export const WithdrawWallet = ({setShow,setShowList,planD}) => {
 export const SelectPlan = ({setShow,setShowList,
     setAmount,amount,destination
   }) => {
+    {console.log("i am in the SelectPlan component")}
+    {console.log("setshow",setShow)}
+    {console.log("setAmount",setAmount)}
+    {console.log("amount",amount)}
+    {console.log(destination)}
+
   return(
     <Container
       backgroundColor={Colors.whiteBase}

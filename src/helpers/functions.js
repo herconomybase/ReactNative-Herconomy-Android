@@ -94,6 +94,7 @@ export const ToastError = (msg) => {
 }
 
 export const calAmtToBeSaved = (planData) => {
+  {console.log("plandata",planData)}
   let amount_to_be_saved;
   if(planData.frequency === "Daily"){
     let diff = moment(planData.end_date).diff(planData.start_date,'days')

@@ -934,6 +934,12 @@ const Savings = props => {
                 backgroundColor="#0009" flex={1} horizontalAlignment="center"
                     verticalAlignment={warning ? "flex-start" : "flex-end"}
                 >
+                  {console.log("money",action)}
+                  {console.log('visible warning',warning)}
+                  {console.log('visible show',show)}
+                  {console.log('visible display',display)}
+
+
                   {
                     action === "Select money" && !warning ? (
                       <AddMoney 

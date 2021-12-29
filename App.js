@@ -340,6 +340,7 @@ const App = () => {
         <NavigationContainer>
           {currentState === 'splash' ? (
             <Splash />
+            // <Upgrade />
           ) : currentState === 'walkthrough' ? (
             <OnboardOne />
           ) : currentState === 'onboard' ? (

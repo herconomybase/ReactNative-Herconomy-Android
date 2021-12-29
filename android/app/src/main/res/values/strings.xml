@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Herconomy (Beta)</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey">mJpiLD6W3RNBRGxu0eBkVj9_RGy7RYJhGaSJH</string>
+    <!-- <string moduleConfig="true" name="CodePushDeploymentKey">mJpiLD6W3RNBRGxu0eBkVj9_RGy7RYJhGaSJH</string> -->
+        <string moduleConfig="true" name="CodePushDeploymentKey">TOOvA_EKNryB2N6368EGqfx-ZL3i9ZDXPxM7Q</string>
+
     <!-- <string moduleConfig="true" name="CodePushDeploymentKey">wsO-aEi8B5TITK9KQNBpKMKvj4ztaNTE3-FaO</string> -->
     <string name="facebook_app_id">413614196743612</string>
+
+    <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
+   <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string> 
 </resources>

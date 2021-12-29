@@ -5,8 +5,8 @@ export const endPoint = 'https://api.herconomy.com/api/v1';
 //export const endPoint = 'https://stagging.agstribe.org/api/v1';
 // export const base_ql_url = "https://socket-staging.agstribe.org/graphql"
 // export const base_ql_http = "https://socket-staging.agstribe.org"
-export const base_ql_url = "https://socket-live.agstribe.org/graphql"
-export const base_ql_http = "https://socket-live.agstribe.org"
+export const base_ql_url = "https://socket-live.herconomy.com/graphql"
+export const base_ql_http = "https://socket-live.herconomy.com"
 
 
 

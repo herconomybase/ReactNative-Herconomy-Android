@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { Page, Container, ImageWrap, SizedBox } from '@burgeon8interactive/bi-react-library';
 import Colors from '../../helpers/colors';
 import Logo from '../../../assets/img/agsLogo_dark.png'
