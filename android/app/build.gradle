@@ -142,8 +142,8 @@ android {
         applicationId "com.itskillscenter.agsnew"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 28
-        versionName "2.4"
+        versionCode 29
+        versionName "2.5"
         multiDexEnabled true
     }
     splits {
@@ -211,7 +211,7 @@ android {
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+                        versionCodes.get(abi) * 1048577 + defaultConfig.versionCode
             }
 
         }

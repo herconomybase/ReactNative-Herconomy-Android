@@ -1,5 +1,4 @@
 import React, {useEffect,useState} from 'react';
-
 import {useStoreState} from 'easy-peasy';
 import {Container, TouchWrap, SizedBox, scaleFont, Avatar, ImageWrap} from '@burgeon8interactive/bi-react-library';
 import {H1, H2, P, LocalAvatar, CommentBoxTemplate,TouchFeedback} from '../components/component';

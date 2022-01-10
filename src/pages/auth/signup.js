@@ -84,6 +84,7 @@ const SignUp = props => {
       global.token = res.token;
       if (res) {
         setLoading(false);
+        storeData('tourscreen', true)
         setCurrentState('onboard');
       }
     } catch (error) {

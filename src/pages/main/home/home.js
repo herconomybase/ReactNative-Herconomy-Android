@@ -33,6 +33,8 @@ const Home = props => {
   const [notification,setNotificaitions] = useState(0);
   const [senders,setSenders] = useState(null);
   const [dismisedQue,setDismissedQue] = useState([]);
+  const [tourscreen,setTourscreen] = useState(false);
+
   const [iceBreakerQuestion, setIceBreakerQuestion] = React.useState([]);
   const {updateTotNotification,updateSenders} = useStoreActions(action=>({
     updateTotNotification : action.notification.updateTotNotification,
@@ -122,6 +124,22 @@ const Home = props => {
     });
   };
 
+console.log(tourscreen);
+  const closetourscreen = async ()=> {
+      try {
+  let tourscreen =  await getData('tourscreen');
+     console.log('tourscreen value',tourscreen)
+     setTourscreen(tourscreen);
+    } catch (error) {
+            console.log('Error', error);
+         }
+  };
+  
+
+  useEffect(() => {
+    closetourscreen();
+  }, [])
+
   useFocusEffect(
     React.useCallback(() => {
       if(!notify_id){
@@ -164,7 +182,7 @@ const Home = props => {
     <React.Fragment>
 
      
-          <Modaltour   />
+         {tourscreen && <Modaltour   />}
 
 
 

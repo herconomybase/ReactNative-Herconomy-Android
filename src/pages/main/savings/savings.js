@@ -835,7 +835,7 @@ const Savings = props => {
                     challenges && challenges.length > 0 ? (
                       <React.Fragment >
                         <Container marginTop={3}>
-                          <H1>Savings Plans</H1>
+                          <H1>Herconomy Plans</H1>
                           <P color={Colors.otherText} fontSize={8}>
                             Start saving with our community and put your money to work.
                           </P>

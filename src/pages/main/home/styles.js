@@ -59,6 +59,28 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 5,
   },
+  imageheadingwelcome:{
+    width: '100%',
+    flexDirection: 'column',
+    marginTop: 20,
+    marginBottom: 5, 
+  },
+  imageheadingtexttop: {
+    // width:'100%',
+    marginLeft:'10%',
+    color: '#F9B404',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  imageheadingtextmiddle: {
+    // width:'100%',
+    // marginBottom:'5%',
+    marginLeft:'10%',
+    color: '#000000',
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
+  
   imageheadingtext: {
     color: '#000000',
     fontWeight: 'bold',
@@ -73,11 +95,144 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width - 20,
     marginHorizontal: 10,
     borderRadius: 30,
-    marginTop: '10%',
+    // marginTop: '10%',
     height: 184,
     backgroundColor: '#FFFFFF',
     alignItems: 'flex-start',
     zIndex: 100,
+  },
+
+
+  welcometour1:{
+    marginTop:'15%',
+    marginLeft:'15%',
+        width: '70%',
+        height: '40%',
+        // backgroundColor:'#F9B404',
+       },
+
+  welcometourimage:{
+    resizeMode: 'contain',
+
+// marginTop:'15%',
+// marginLeft:'15%',
+width: '100%',
+    height: '100%',
+// //     backgroundColor:'#F9B404',
+  
+  },
+
+
+  loginwelcome: {
+     width: Dimensions.get('screen').width ,
+    height: '100%',
+    // marginHorizontal: 10,
+    borderRadius: 30,
+    // marginTop: '50%',
+    // height: 250,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'flex-start',
+    zIndex: 100,
+  },
+
+  logo1covermenu:{
+    marginTop:'2%',
+    marginLeft:'2%',
+    width: 38,
+    height: 33,
+    backgroundColor: '#ffffff',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  
+  },
+  logo1coversearch:{
+    marginTop:'2%',
+    marginLeft:'79%',
+    width: 38,
+    height: 33,
+    backgroundColor: '#ffffff',
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  
+  },
+
+  logo1covermessage:{
+    marginTop:'2%',
+    marginLeft:'88%',
+    width: 38,
+    height: 33,
+    backgroundColor: '#ffffff',
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  
+  },
+
+  imageheadingtexttop: {
+    // width:'100%',
+    marginLeft:'5%',
+    color: '#F9B404',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginBottom:'2%',
+  },
+  imageheadingtextmiddle: {
+    // width:'100%',
+    // marginBottom:'5%',
+    marginLeft:'5%',
+    color: '#000000',
+    fontWeight: 'bold',
+    fontSize: 24,
+     marginBottom:'4%',
+  },
+
+  line:{
+    width: '30%',
+    height:'0.3%',
+    marginLeft:'7%',
+    // marginBottom:'5%',
+    backgroundColor:'#e7f0f3',
+
+  },
+
+
+  modaltextStylewelcome1: {
+    color: '#000000',
+    fontSize: 15,
+    marginTop:'5%',
+    marginLeft: '5%',
+     marginBottom: 2,
+  },
+  modaltextStylewelcome2: {
+    color: '#000000',
+    fontSize: 15,
+    // marginTop:'5%',
+    marginLeft: '5%',
+    //  marginBottom: 10,
+  },
+  modaltextStylewelcome3: {
+    color: '#000000',
+    fontSize: 15,
+     marginTop:'5%',
+    marginLeft: '5%',
+    marginBottom: 10,
+  },
+
+  modaltextStyle3: {
+    color: '#000000',
+    fontSize: 15,
+    marginTop:'5%',
+    marginLeft: 31,
+     marginBottom: 10,
+  },
+  modaltextStyle4: {
+    color: '#000000',
+    fontSize: 15,
+    // marginTop:'%',
+    marginLeft: 31,
+    marginBottom: 10,
   },
 
   imagebackground: {
@@ -98,6 +253,37 @@ const styles = StyleSheet.create({
     marginLeft: 31,
     marginBottom: 15,
   },
+
+  modalbuttonwelcome: {
+    // width: Dimensions.get('screen').width-40,
+    width:'90%',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    // marginHorizontal:'5%',
+      marginLeft:'3%',
+     marginRight:'5%',
+    marginTop:'10%',
+    // backgroundColor:'blue',
+
+
+    // marginLeft: 35,
+  },
+  buttonGotItwelcome: {
+    alignItems: 'center',
+    width: 80,
+    height: 35,
+    color: '#ffffff',
+    backgroundColor: '#F9B404',
+    borderRadius: 8,
+    marginLeft: 10,
+  },
+  buttonGotItTextwelcome: {
+    paddingTop: 5,
+    color: '#000000',
+    fontSize: 18,
+  },
+
   modalbutton: {
     width: '100%',
     flexDirection: 'row',

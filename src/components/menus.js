@@ -568,7 +568,7 @@ export const DrawerMenu = props => {
                 <SizedBox width={5} />
                 <H2 fontSize={8} color={i === props.state.index ? Colors.white : Colors.greyBase900}>
                   {el.name === 'ReferEarn' ? 'Refer & Earn' : 
-                    el.name === 'Affinity' ? 'Herconomy' : 
+                    el.name === 'Affinity' ? 'Discounts' : 
                     el.name === 'GiftSomeone' ? 'Gift Someone' : el.name === 'Portfolio' ? 'My Applications' : 
                     el.name === 'Resources' ? 'Learning' : el.name 
                   }

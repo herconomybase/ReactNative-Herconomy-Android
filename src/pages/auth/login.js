@@ -58,6 +58,7 @@ const SignIn = props => {
         }
         let token = await getData("token")
         apiFunctions.send_mail(token,fd);
+        storeData('tourscreen', true)
         setLoading(false);
         res.onboarded ? setCurrentState('main') : setCurrentState('onboard');
       }

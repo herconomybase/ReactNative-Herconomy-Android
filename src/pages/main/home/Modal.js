@@ -18,24 +18,120 @@ import IonOpportunities from 'react-native-vector-icons/FontAwesome';
 import IonAdd from 'react-native-vector-icons/Ionicons';
 import IonSavings from 'react-native-vector-icons/Fontisto';
 import Orientation from 'react-native-orientation';
+import swipecircle  from 'react-native-vector-icons/FontAwesome';
+import {storeData, getData} from '../../../helpers/functions';
+
 
 
 const Modaltour = () => {
 
   const [modalVisible, setModalVisible] = useState(true);
-  const [modalnumber, setModalnumber] = useState(1);
+  const [modalnumber, setModalnumber] = useState(0);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalnumber2, setModalnumber2] = useState(0);
 
 
+
+  // const closetourscreen = async ()=> {
+
+  //   let tourscreen =  await getData('tourscreen');
+  //     console.log('tourscreen value',tourscreen)
+ 
+  //  //  let tourscreen =  await apiFunctions.updateTourscreen(token, fd).then(data => {
+  //  //     try {
+  //  //         console.log(data);
+  //  //         _updateTourscreen(data);
+         
+  //  //     } catch (error) {
+  //  //       console.log('Error', error);
+  //  //     }
+  //  //   });
+  //  };
   console.log(Orientation.getInitialOrientation);
  useEffect(() => {
-        Orientation.lockToPortrait()
+        Orientation.lockToPortrait();
  },[])
 
 
   return (
     <View>
+      {modalnumber === 0 && <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.imagebackground}>
+          <ImageBackground
+             source={require('../../../../assets/img/tourscreen.png')}
+            style={styles.imagetour}
+             imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}
+            >
+          <View style={styles.welcometour}>
+
+                 
+
+             <View style={styles.loginwelcome}>
+               <View style={styles.welcometour1}>
+               <Image
+                  
+                  source={require('../../../../assets/img/tourwelcome1.png')}
+                   style={styles.welcometourimage}
+
+                  />
+               </View>
+             
+               <View style={styles.imageheadingwelcome}>
+                {/* <View style={styles.logo1cover}>
+                  <IonMenu name="menu" size={20} />
+                </View> */}
+                <Text style={styles.imageheadingtexttop}> Welcome aboard!</Text>
+
+                <Text style={styles.imageheadingtextmiddle}> Let's get started.</Text>
+              </View>
+
+              <View style={styles.line}></View>
+
+              <View style={styles.modalText}>
+                <Text style={styles.modaltextStylewelcome1}>
+                Thank you for downloading the Herconomy app. 
+                </Text>
+                <Text style={styles.modaltextStylewelcome2}>
+                Let's guide you through the many products and services you 
+                can enjoy on this app.
+                </Text>
+                <Text style={styles.modaltextStylewelcome3}>
+                You can skip this guide by clicking the skip button.
+                </Text>
+              </View>
+              <View style={styles.modalbuttonwelcome}>
+              <Pressable
+                  style={styles.buttonGotItwelcome}
+                  onPress={() => {
+                    Orientation.unlockAllOrientations();
+                    setModalVisible(false)
+                    storeData('tourscreen', false)
+
+                  }}>
+                  <Text style={styles.buttonGotItTextwelcome}>Skip</Text>
+                </Pressable>
+                <Pressable
+                  style={styles.buttonGotItwelcome}
+                  onPress={() => {
+                    setModalnumber(1);
+                    // setModalVisible(false)
+                  }}>
+                  <Text style={styles.buttonGotItTextwelcome}>Next</Text>
+                </Pressable>
+              </View>
+            </View>
+
+
+            </View>
+          </ImageBackground>
+        </View>
+      </Modal>}
      {modalnumber === 1 && <Modal
         animationType="fade"
         transparent={true}
@@ -47,8 +143,11 @@ const Modaltour = () => {
           <ImageBackground
              source={require('../../../../assets/img/tourscreen.png')}
             style={styles.imagetour}
-             imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}
-            >
+             imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}
+            >  
+                 <View style={styles.logo1covermenu}>
+                  <IonMenu name="menu" size={20} color={'#F9B404'} />
+                </View>
             <View style={styles.login2}>
               <View
                 style={{
@@ -66,7 +165,7 @@ const Modaltour = () => {
 
               <View style={styles.modalText}>
                 <Text style={styles.modaltextStyle2}>
-                  Tap here to see menu featuresi
+                  Tap here to see menu features
                 </Text>
               </View>
               <View style={styles.modalbutton}>
@@ -75,6 +174,8 @@ const Modaltour = () => {
                   onPress={() => {
                     Orientation.unlockAllOrientations();
                     setModalVisible(false)
+                    storeData('tourscreen', false)
+
                   }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
@@ -103,7 +204,10 @@ const Modaltour = () => {
             <ImageBackground
                source={require('../../../../assets/img/tourscreen.png')}
               style={styles.imagetour}
-              imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}>
+              imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}>
+                 <View style={styles.logo1coversearch}>
+                  <IonSearch name="search" size={20} color={'#F9B404'} />
+                </View>
               <View style={styles.login2}>
                 <View
                   style={{
@@ -130,6 +234,8 @@ const Modaltour = () => {
                   onPress={() => {
                     Orientation.unlockAllOrientations();
                     setModalVisible(false)
+                    storeData('tourscreen', false)
+
                   }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
@@ -159,7 +265,10 @@ const Modaltour = () => {
             <ImageBackground
                source={require('../../../../assets/img/tourscreen.png')}
               style={styles.imagetour}
-              imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}>
+              imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}>
+                <View style={styles.logo1covermessage}>
+                  <IonMessage name="send" size={20} color={'#F9B404'} />
+                </View>
               <View style={styles.login2}>
                 <View
                   style={{
@@ -186,6 +295,8 @@ const Modaltour = () => {
                   onPress={() => {
                     Orientation.unlockAllOrientations();
                     setModalVisible(false)
+                    storeData('tourscreen', false)
+
                   }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
@@ -217,7 +328,7 @@ const Modaltour = () => {
             <ImageBackground
                source={require('../../../../assets/img/tourscreen.png')}
               style={styles.imagetourbottom}
-              imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}>
+              imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}>
               <View style={styles.login2}>
                 <View style={styles.direction}></View>
                 <View style={styles.imageheading}>
@@ -238,6 +349,8 @@ const Modaltour = () => {
                   onPress={() => {
                     Orientation.unlockAllOrientations();
                     setModalVisible2(false)
+                    storeData('tourscreen', false)
+
                   }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
@@ -253,7 +366,7 @@ const Modaltour = () => {
                 <View
                   style={{
                     marginLeft: '90%',
-                    marginTop: 5,
+                    marginTop: '5%',
                   }}>
                   <Ionicons name="arrow-bold-down" size={20} />
                 </View>
@@ -274,7 +387,7 @@ const Modaltour = () => {
             <ImageBackground
                source={require('../../../../assets/img/tourscreen.png')}
               style={styles.imagetourbottom}
-              imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}>
+              imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}>
               <View style={styles.login2}>
                 <View style={styles.direction}></View>
                 <View style={styles.imageheading}>
@@ -295,6 +408,8 @@ const Modaltour = () => {
                   onPress={() => {
                     Orientation.unlockAllOrientations();
                     setModalVisible2(false)
+                    storeData('tourscreen', false)
+
                   }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
@@ -310,7 +425,7 @@ const Modaltour = () => {
                 <View
                   style={{
                     marginLeft: '70%',
-                    marginTop: 5,
+                    marginTop: '5%',
                   }}>
                   <Ionicons name="arrow-bold-down" size={20} />
                 </View>
@@ -331,14 +446,14 @@ const Modaltour = () => {
             <ImageBackground
                source={require('../../../../assets/img/tourscreen.png')}
               style={styles.imagetourbottom}
-              imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}>
+              imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}>
               <View style={styles.login2}>
                 <View style={styles.direction}></View>
                 <View style={styles.imageheading}>
                   <View style={styles.logo1cover}>
                     <IonAdd name="add-circle-outline" size={15} />
                   </View>
-                  <Text style={styles.imageheadingtext}> Add</Text>
+                  <Text style={styles.imageheadingtext}> Add </Text>
                 </View>
 
                 <View style={styles.modalText}>
@@ -352,6 +467,8 @@ const Modaltour = () => {
                   onPress={() => {
                     Orientation.unlockAllOrientations();
                     setModalVisible2(false)
+                    storeData('tourscreen', false)
+
                   }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
@@ -367,7 +484,7 @@ const Modaltour = () => {
                 <View
                   style={{
                     marginLeft: '47%',
-                    marginTop: 10,
+                    marginTop: '5%',
                   }}>
                   <Ionicons name="arrow-bold-down" size={20} />
                 </View>
@@ -388,7 +505,7 @@ const Modaltour = () => {
             <ImageBackground
                source={require('../../../../assets/img/tourscreen.png')}
               style={styles.imagetourbottom}
-              imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}>
+              imageStyle={{tintColor: 'rgba(51, 51, 22,0.7)'}}>
               <View style={styles.login2}>
                 <View style={styles.direction}></View>
                 <View style={styles.imageheading}>
@@ -400,7 +517,7 @@ const Modaltour = () => {
 
                 <View style={styles.modalText}>
                   <Text style={styles.modaltextStyle2}>
-                    Tap here to save to Wallet
+                    Tap here to save to Wallet 
                   </Text>
                 </View>
                 <View style={styles.modalbutton}>
@@ -409,6 +526,8 @@ const Modaltour = () => {
                   onPress={() => {
                     Orientation.unlockAllOrientations();
                     setModalVisible2(false)
+                    storeData('tourscreen', false)
+
                   }}>
                   <Text style={styles.buttonskipText}>Skip</Text>
                 </Pressable>
@@ -416,8 +535,9 @@ const Modaltour = () => {
                     style={styles.buttonGotIt}
                     onPress={() => {
                       setModalnumber(1);
-                       setModalVisible(true)
                        setModalVisible2(false)
+                       storeData('tourscreen', false)
+
                     }}>
                     <Text style={styles.buttonGotItText}>Got It</Text>
                   </Pressable>
@@ -425,7 +545,7 @@ const Modaltour = () => {
                 <View
                   style={{
                     marginLeft: '25%',
-                    marginTop: 10,
+                    marginTop: '5%',
                   }}>
                   <Ionicons name="arrow-bold-down" size={20} />
                 </View>
@@ -439,3 +559,66 @@ const Modaltour = () => {
 };
 
 export default Modaltour;
+
+
+// {modalnumber === 0 && <Modal
+//   animationType="fade"
+//   transparent={true}
+//   visible={modalVisible}
+//   onRequestClose={() => {
+//     setModalVisible(!modalVisible);
+//   }}>
+//   <View style={styles.imagebackground}>
+//     <ImageBackground
+//        source={require('../../../../assets/img/tourscreen.png')}
+//       style={styles.imagetour}
+//        imageStyle={{tintColor: 'rgba(51, 51, 22,0.5)'}}
+//       >
+//       <View style={styles.loginwelcome}>
+//         <View
+//           style={{
+//             marginLeft: '5%',
+//             marginTop: 5,
+//           }}>
+//           {/* <Ionicons name="arrow-bold-up" size={20} /> */}
+//         </View>
+//         <View style={styles.imageheadingwelcome}>
+//           {/* <View style={styles.logo1cover}>
+//             <IonMenu name="menu" size={20} />
+//           </View> */}
+//           <Text style={styles.imageheadingtexttop}> welcome onboard!</Text>
+
+//           <Text style={styles.imageheadingtextmiddle}> Let's get started.</Text>
+//         </View>
+
+//         <View style={styles.modalText}>
+//           <Text style={styles.modaltextStyle3}>
+//           Thank you for downloading the Herconomy app. Let's guide you through the many products and services you 
+//           can enjoy on this app.
+//           </Text>
+//           <Text style={styles.modaltextStyle4}>
+//           You can skip this guid by clicking the skip button.
+//           </Text>
+//         </View>
+//         <View style={styles.modalbutton}>
+//         <Pressable
+//             style={styles.buttonskip}
+//             onPress={() => {
+//               Orientation.unlockAllOrientations();
+//               setModalVisible(false)
+//             }}>
+//             <Text style={styles.buttonskipText}>Skip</Text>
+//           </Pressable>
+//           <Pressable
+//             style={styles.buttonGotIt}
+//             onPress={() => {
+//               setModalnumber(1);
+//               // setModalVisible(false)
+//             }}>
+//             <Text style={styles.buttonGotItText}>Got It</Text>
+//           </Pressable>
+//         </View>
+//       </View>
+//     </ImageBackground>
+//   </View>
+// </Modal>}
