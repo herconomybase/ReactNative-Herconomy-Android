@@ -470,6 +470,7 @@ export const DrawerMenu = props => {
         props.navigation.navigate("Upgrade");
       }
   }
+  
   const checkCurrentVersion = async () => {
     try{
       let res = await apiFunctions.getCurrentVersion(token)

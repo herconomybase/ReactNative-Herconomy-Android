@@ -19,7 +19,6 @@ import {gold_plan_id,silver_plan_id} from '../helpers/constants';
 import { Retry } from '../components/retry';
 
 
-
 const Account = props => {
     const [isLoading,setLoading] = useState(false);
     const [subscriptionStatus,setSubscriptionStatus] = useState({sub_status : false});
