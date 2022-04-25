@@ -26,7 +26,9 @@ const Colors = {
   savingYellow : '#FBEFD6',
   savingGrey : '#999999',
   lightYellow : '#F0ECE4',
-  lightestGrey : '#F6F6F6'
+  lightestGrey : '#F6F6F6',
+  blue:'#0000FF'
+
 };
 
 module.exports = Colors;

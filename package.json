@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android_publish": "code-push release-react AGS-Android android  -m -d Production",
+    "android_publish": "appcenter codepush release-react -a Herconomy/Herconomy -d Production",
     "android_staging": "code-push release-react AGS-Android android  -m -d Staging",
     "clean": "cd android && gradlew clean &&clear",
     "android": "clear && react-native run-android",
@@ -41,6 +41,7 @@
     "react-content-loader": "^6.0.3",
     "react-native": "0.63.2",
     "react-native-add-calendar-event": "^3.0.2",
+    "react-native-autolink": "^4.0.0",
     "react-native-blob-util": "^0.13.18",
     "react-native-chart-kit": "^6.11.0",
     "react-native-code-push": "^6.3.0",
@@ -91,5 +92,8 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "resolutions": {
+    "electron": "^11.0.1"
   }
 }

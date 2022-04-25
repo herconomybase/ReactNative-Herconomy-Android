@@ -35,7 +35,15 @@ import {useFocusEffect} from '@react-navigation/core';
 import {Capitalize, ToastShort} from '../../../helpers/utils';
 import {ModalWebView} from '../../../helpers/paystack_webview';
 import axios from 'axios';
+import { WebView } from 'react-native-webview';
+import { Linking } from 'react-native';
+import Logo from '../../../../assets/img/agsLogo_dark.png'
+import UpgradePNG from '../../../../assets/img/upgrade.jpeg'
+
+
 import {FONTSIZE, SAVING_TEST_KEY} from '../../../helpers/constants';
+import Autolink from 'react-native-autolink';
+
 
 const Progress = ({load}) => {
   let interest_fraction = load && load.interest && load.saved ? Number(load.interest) / (Number(load.interest) + Number(load.saved)) : 0;
@@ -377,523 +385,67 @@ const Savings = props => {
     }, []),
   );
   return (
+    // <WebView source={{ uri: 'https://beta.herconomy.com' }} />
     <Page backgroundColor={Colors.primary}>
-      <Container paddingHorizontal={6} paddingTop={6} backgroundColor={Colors.primary} direction="row">
-        <TouchFeedback paddingRight={2} paddingBottom={2} paddingTop={2} onPress={() => props.navigation.openDrawer()}>
-          <Feather Icon name="menu" size={scaleFont(FONTSIZE.menu)} color="#fff" />
-        </TouchFeedback>
-        <Container
-          backgroundColor={Colors.primary}
-          paddingHorizontal={6}
-          paddingTop={0.5}
-          paddingBottom={3}
-          widthPercent="80%"
-          horizontalAlignment="center"
-          verticalAlignment="center">
-          <H1 fontSize={FONTSIZE.page} color={Colors.whiteBase}>
-            Savings
-          </H1>
-        </Container>
-      </Container>
-
-      <Container
-        flex={1}
-        backgroundColor={Colors.white}
-        marginTop={2}
-        borderTopLeftRadius={50}
-        borderTopRightRadius={50}
-        paddingHorizontal={3}>
-        <SizedBox height={6} />
-        {loading ? (
-          <SavingsLoader />
-        ) : (
-          <React.Fragment>
-            <Container direction="row" backgroundColor={Colors.white} horizontalAlignment="space-between" paddingBottom={2}>
-              {['Dashboard', 'Plans', 'Wallet'].map((el, i) => (
-                <Container widthPercent="33%" key={i}>
-                  <TouchFeedback
-                    onPress={() => {
-                      props.navigation.navigate(el);
-                    }}>
-                    <Container
-                      backgroundColor={el === current ? Colors.primary : Colors.white}
-                      horizontalAlignment="center"
-                      paddingVertical={1.5}
-                      borderRadius={5}>
-                      <H1 fontSize={8} color={el === current ? Colors.white : Colors.lightBlack}>
-                        {el}
-                      </H1>
-                    </Container>
-                  </TouchFeedback>
-                </Container>
-              ))}
-            </Container>
-            <Container height={1} borderBottomWidth={0.8} borderColor={Colors.line} marginBottom={2} />
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <Container borderRadius={10} height={30} verticalAlignment="center">
-                <Swiper
-                  activeDotColor={Colors.whiteBase}
-                  autoplay={true}
-                  backgroundColor={Colors.primary}
-                  borderRadius={10}
-                  // dotStyle={{
-                  //   marginTop: 100
-                  // }}
-                  // activeDotStyle={{
-                  //   marginTop: 100
-                  // }}
-                >
-                  {['Select money', 'View Wallet', 'Plans', 'Goals', 'Show more'].map((item, i) => (
-                    <Container
-                      horizontalAlignment={item !== 'Show more' ? 'center' : 'flex-start'}
-                      borderRadius={10}
-                      paddingVertical={3}
-                      key={i}>
-                      {fetching ? (
-                        <Container paddingLeft={item !== 'Show more' ? 0 : 5}>
-                          <ActivityIndicator size={15} color={Colors.button} />
-                        </Container>
-                      ) : null}
-                      {item === 'Select money' ? (
-                        <React.Fragment>
-                          <P color={Colors.white}>Total Savings</P>
-                          <H1 fontSize={25} color={Colors.white}>
-                            &#8358;{savings && savings.amount_saved ? numeral(savings.amount_saved).format('0,0.00') : '0.00'}
-                          </H1>
-                          {/* <P fontSize={5} color={Colors.white}>Total Interest</P> */}
-                          <Container paddingLeft={1} paddingRight={1}>
-                            <P fontSize={FONTSIZE.small} color={Colors.white} textAlign="center">
-                              This is the amount you have saved across all savings, plans and goals.
-                            </P>
-                          </Container>
-                          <Container direction="row" verticalAlignment="center">
-                            <P fontSize={8} color={Colors.white}>
-                              You have earned + &#8358;
-                              {numeral(interest).format('0,0.00')} interest.
-                            </P>
-                            <SizedBox width={1} />
-                            {/* <Avatar size={1}
-                                        backgroundColor={Colors.white}
-                                      />
-                                      <P fontSize={8} color={Colors.white}> +{
-                                        (
-                                          savings && savings.avg_roi && (savings.avg_roi/2)
-                                        ) ? (
-                                          numeral((savings.avg_roi/2))
-                                          .format('0')
-                                        ) : '0'}%
-                                      </P> */}
-                          </Container>
-                          <SizedBox height={2} />
-                        </React.Fragment>
-                      ) : null}
-                      {item === 'View Wallet' ? (
-                        <React.Fragment>
-                          {/* <SizedBox height={4}/> */}
-                          <P color={Colors.whiteBase}>Wallet Balance</P>
-                          <H1 fontSize={25} color={Colors.white}>
-                            &#8358;{gql_user && gql_user.wallet_balance ? numeral(gql_user.wallet_balance).format('0,0.00') : '0.00'}
-                          </H1>
-                          <P fontSize={FONTSIZE.small} color={Colors.white}>
-                            This is your Wallet balance with Herconomy.
-                          </P>
-                          <SizedBox height={2} />
-                        </React.Fragment>
-                      ) : null}
-
-                      {item === 'Plans' ? (
-                        <React.Fragment>
-                          {/* <SizedBox height={4}/> */}
-                          <P color={Colors.whiteBase}>Plans Balance</P>
-                          <H1 fontSize={25} color={Colors.white}>
-                            &#8358;
-                            {plans ? numeral(plans).format('0,0.00') : '0.00'}
-                          </H1>
-                          <P fontSize={FONTSIZE.small} color={Colors.white}>
-                            This is your Plans balance with Herconomy.
-                          </P>
-                          <SizedBox height={2} />
-                        </React.Fragment>
-                      ) : null}
-
-                      {item === 'Goals' ? (
-                        <React.Fragment>
-                          {/* <SizedBox height={4}/> */}
-                          <P color={Colors.whiteBase}>Goals Balance</P>
-                          <H1 fontSize={25} color={Colors.white}>
-                            &#8358;
-                            {goals ? numeral(goals).format('0,0.00') : '0.00'}
-                          </H1>
-                          <P fontSize={FONTSIZE.small} color={Colors.white}>
-                            This is your Goals balance with Herconomy.
-                          </P>
-                          <SizedBox height={2} />
-                        </React.Fragment>
-                      ) : null}
-
-                      {item !== 'Show more' ? (
-                        <Button
-                          widthPercent="80%"
-                          borderRadius={3}
-                          backgroundColor={Colors.white}
-                          color={Colors.black}
-                          borderColor={Colors.white}
-                          title={item === 'Select money' ? 'Add funds' : item}
-                          paddingVertical={1.4}
-                          onPress={() => {
-                            if (item === 'View Wallet') {
-                              return props.navigation.navigate('Wallet');
-                            }
-                            if (item === 'Plans') {
-                              return props.navigation.navigate('Plans');
-                            }
-                            if (item === 'Goals') {
-                              return props.navigation.navigate('Plans');
-                            }
-                            if (item === 'Select money') {
-                              setShow(true);
-                              return setAction('Select money');
-                            }
-                          }}
-                        />
-                      ) : null}
-                      {item === 'Show more' ? (
-                        <Container verticalAlignment="center">
-                          <Container
-                            paddingHorizontal={5}
-                            //backgroundColor={'red'}
-                          >
-                            <H2 fontSize={8}>Savings</H2>
-                            <Container direction="row" horizontalAlignment="space-between">
-                              <Progress
-                                load={{
-                                  saved: savings && savings.amount_saved ? savings.amount_saved : 0,
-                                  interest: interest,
-                                }}
-                              />
-
-                              <Container>
-                                <Container marginBottom={2}>
-                                  <Container direction="row" verticalAlignment="center">
-                                    <Avatar backgroundColor={Colors.black} size={1.3} />
-                                    <SizedBox width={1} />
-                                    <H2 fontSize={5} color={Colors.whiteBase}>
-                                      Total Savings
-                                    </H2>
-                                  </Container>
-                                  <H2 color={Colors.whiteBase}>
-                                    &#8358;{savings && savings.amount_saved ? numeral(savings.amount_saved).format('0,0.00') : '0.00'}
-                                  </H2>
-                                </Container>
-                                <Container marginBottom={2}>
-                                  <Container direction="row" verticalAlignment="center">
-                                    <Avatar backgroundColor={Colors.greyBase300} size={1.3} />
-                                    <SizedBox width={1} />
-                                    <H2 fontSize={5} color={Colors.whiteBase}>
-                                      Interest
-                                    </H2>
-                                  </Container>
-                                  <H2 color={Colors.whiteBase}>&#8358;{numeral(interest).format('0,0.00')}</H2>
-                                </Container>
-                                {/* <Button 
-                                              title={'Show more'}
-                                              paddingVertical={1}
-                                              fontSize={5}
-                                              backgroundColor={Colors.whiteBase}
-                                              color={Colors.black}
-                                              borderColor={Colors.whiteBase}
-                                              borderRadius={3}
-                                              onPress={()=>props.navigation.navigate('Performance')}
-                                            /> */}
-                              </Container>
-                            </Container>
-                          </Container>
-                        </Container>
-                      ) : null}
-                    </Container>
-                  ))}
-                </Swiper>
-              </Container>
-              <Container height={3} borderBottomWidth={0.8} borderColor={Colors.line} />
-
-              <Container marginTop={3}>
-                <H1>To - Do List</H1>
-              </Container>
-              {gql_user && Array.isArray(gql_user.user_cards) && gql_user.user_cards.length == 0 ? (
-                <TouchFeedback
-                  onPress={() => {
-                    setWarning(true);
-                  }}>
-                  <Container
-                    direction="row"
-                    widthPercent="100%"
-                    marginTop={3}
-                    borderRadius={10}
-                    backgroundColor={Colors.savingsGreen}
-                    paddingHorizontal={5}
-                    paddingVertical={2}
-                    verticalAlignment="center"
-                    borderWidth={0.8}
-                    borderColor={Colors.line}
-                    horizontalAlignment="space-between">
-                    <Container width="10%" marginRight={3}>
-                      <ImageWrap height={5} fit={'contain'} width={10} source={cardPNG} />
-                    </Container>
-                    <Container widthPercent="80%">
-                      <H2>Link a card</H2>
-                      <P fontSize={5}>Enable automatic saving by linking your card to reach your saving goals</P>
-                    </Container>
-                    <Container widthPercent="10%" textAlign="right">
-                      <Feather name="chevron-right" size={scaleFont(25)} />
-                    </Container>
-                  </Container>
-                </TouchFeedback>
-              ) : null}
-              {gql_user && !gql_user.phone ? (
-                <TouchWrap
-                  onPress={() => {
-                    setAction('AddPhone');
-                    setWarning(false);
-                    setShow(true);
-                  }}>
-                  <Container
-                    direction="row"
-                    widthPercent="100%"
-                    marginTop={3}
-                    borderRadius={10}
-                    backgroundColor={Colors.savingsGreen}
-                    paddingHorizontal={5}
-                    paddingVertical={2}
-                    verticalAlignment="center"
-                    borderWidth={0.8}
-                    borderColor={Colors.line}
-                    horizontalAlignment="space-between">
-                    <Container width="10%" marginRight={3}>
-                      <ImageWrap height={5} fit={'contain'} width={10} source={cardPNG} />
-                    </Container>
-                    <Container widthPercent="80%">
-                      <H2>Add a phone number</H2>
-                      <P fontSize={5}>We need this to generate your wallet address.</P>
-                    </Container>
-                    <Container widthPercent="10%" textAlign="right">
-                      <Feather name="chevron-right" size={scaleFont(25)} />
-                    </Container>
-                  </Container>
-                </TouchWrap>
-              ) : null}
-
-              {!gql_user || !gql_user.bvn_detail ? (
-                <TouchFeedback
-                  onPress={() => {
-                    setShow(true);
-                    setAction('AddBVN');
-                  }}>
-                  <Container
-                    direction="row"
-                    widthPercent="100%"
-                    marginTop={3}
-                    borderRadius={10}
-                    backgroundColor={Colors.savingYellow}
-                    paddingHorizontal={5}
-                    paddingVertical={2}
-                    verticalAlignment="center"
-                    borderWidth={0.8}
-                    borderColor={Colors.line}
-                    horizontalAlignment="space-between">
-                    <Container width="10%" marginRight={3}>
-                      <ImageWrap height={5} fit={'contain'} width={10} source={checkPNG} />
-                    </Container>
-                    <Container widthPercent="80%">
-                      <H2>Add your BVN</H2>
-                      <P fontSize={5}>Boost your confidence with us by linking your bvn for ease savings goals</P>
-                    </Container>
-                    <Container widthPercent="10%" textAlign="right">
-                      <Feather name="chevron-right" size={scaleFont(25)} />
-                    </Container>
-                  </Container>
-                </TouchFeedback>
-              ) : null}
-
-              <TouchFeedback
-                onPress={() => {
-                  setShow(true);
-                  return setAction('Select money');
-                }}>
-                <Container
-                  direction="row"
-                  widthPercent="100%"
-                  marginTop={3}
-                  borderRadius={10}
-                  backgroundColor={Colors.savingsGreen}
-                  paddingHorizontal={5}
-                  paddingVertical={3}
-                  verticalAlignment="center"
-                  borderWidth={0.8}
-                  borderColor={Colors.line}
-                  horizontalAlignment="space-between">
-                  <Container width="10%" marginRight={3}>
-                    <ImageWrap height={5} fit={'contain'} width={10} source={transfefPNG} />
-                  </Container>
-                  <Container widthPercent="80%">
-                    <P fontSize={5}>Fund your wallet!</P>
-                  </Container>
-                  <Container widthPercent="10%" textAlign="right">
-                    <Feather name="chevron-right" size={scaleFont(25)} />
-                  </Container>
-                </Container>
-              </TouchFeedback>
-
-              <TouchFeedback onPress={() => props.navigation.navigate('GoalName')}>
-                <Container
-                  direction="row"
-                  widthPercent="100%"
-                  marginTop={3}
-                  borderRadius={10}
-                  backgroundColor={Colors.savingYellow}
-                  paddingHorizontal={5}
-                  paddingVertical={4}
-                  verticalAlignment="center"
-                  borderWidth={0.8}
-                  borderColor={Colors.line}
-                  horizontalAlignment="space-between">
-                  <Container width="10%" marginRight={3}>
-                    <ImageWrap height={5} fit={'contain'} width={10} source={piggyPNG} />
-                  </Container>
-                  <Container widthPercent="80%">
-                    {/* <H2 fontSize={8}>OWN YOUR FUTURE</H2> */}
-                    <P fontSize={5}>Own your future with Herconomy Savings.</P>
-                  </Container>
-                  <Container widthPercent="10%" textAlign="right">
-                    <Feather name="chevron-right" size={scaleFont(25)} />
-                  </Container>
-                </Container>
-              </TouchFeedback>
-              {challenges && challenges.length > 0 ? (
-                <React.Fragment>
-                  <Container marginTop={3}>
-                    <H1>Herconomy Plans</H1>
-                    <P color={Colors.otherText} fontSize={8}>
-                      Start saving with our community and put your money to work.
-                    </P>
-                  </Container>
-                  {challenges.map((item, i) => (
-                    <TouchFeedback
-                      key={i}
-                      onPress={() => {
-                        let matured = item.maturity_date && moment(item.maturity_date).diff(moment(new Date()), 'days') > 0 ? false : true;
-                        let joined = challenge_ids && Array.isArray(challenge_ids) && challenge_ids.includes(item.id) ? true : false;
-                        // return console.log("item>>",item)
-                        if (matured || joined) return;
-                        props.navigation.navigate('GoalName', {
-                          type: 'challenge',
-                          item,
-                        });
-                      }}>
-                      <Container
-                        direction="row"
-                        horizontalAlignment="space-between"
-                        marginTop={2}
-                        borderRadius={10}
-                        paddingHorizontal={5}
-                        paddingVertical={1.3}
-                        backgroundColor={Colors.whiteBase}
-                        marginBottom={challenges.length == i + 1 ? 5 : 0}>
-                        <Container widthPercent="30%" verticalAlignment="center">
-                          <ImageWrap url={item.image ? item.image : null} flex={1} fit={'contain'} />
-                        </Container>
-                        <Container widthPercent="65%" paddingVertical={3}>
-                          <H2 fontSize={10}>{item.title ? Capitalize(item.title) : null}</H2>
-                          <H2 fontSize={5}>
-                            {item.user_savings_challenges && Array.isArray(item.user_savings_challenges)
-                              ? item.user_savings_challenges.length
-                              : 0}
-                            {''}{' '}
-                            {item.user_savings_challenges &&
-                            Array.isArray(item.user_savings_challenges) &&
-                            item.user_savings_challenges.length > 1
-                              ? 'members'
-                              : 'member'}
-                          </H2>
-                          <SizedBox height={1} />
-                          <P fontSize={8} color={Colors.otherText}>
-                            {item.description ? item.description : null}
-                          </P>
-                          <Container
-                            marginTop={2}
-                            direction="row"
-                            horizontalAlignment={
-                              item.maturity_date && moment(item.maturity_date).diff(moment(new Date()), 'days') < 0
-                                ? 'space-between'
-                                : 'flex-end'
-                            }>
-                            {item.maturity_date && moment(item.maturity_date).diff(moment(new Date()), 'days') < 0 ? (
-                              <P color={'red'} fontSize={3}>
-                                Matured
-                              </P>
-                            ) : null}
-                            {challenge_ids && Array.isArray(challenge_ids) && challenge_ids.includes(item.id) ? (
-                              <H1 fontSize={5}>Joined</H1>
-                            ) : null}
-                          </Container>
-                        </Container>
-                      </Container>
-                    </TouchFeedback>
-                  ))}
-                </React.Fragment>
-              ) : null}
-              {fetching ? <SavingsLoader /> : null}
-              {/* <Dashboard /> */}
-            </ScrollView>
-          </React.Fragment>
-        )}
-        {payload && Array.isArray(Object.values(payload)) && Object.values(payload).length > 0 ? (
-          <ModalWebView
-            payload={payload}
-            transactionHandler={transactionHandler}
-            setLoading={setLoading}
-            isLoading={loading}
-            setShowModal={setShowModal}
-            showModal={showModal}
-          />
-        ) : null}
-      </Container>
-      <Modal visible={show || warning || display}>
-        <Container backgroundColor="#0009" flex={1} horizontalAlignment="center" verticalAlignment={warning ? 'flex-start' : 'flex-end'}>
-          {console.log('money', action)}
-          {console.log('visible warning', warning)}
-          {console.log('visible show', show)}
-          {console.log('visible display', display)}
-
-          {action === 'Select money' && !warning ? (
-            <AddMoney setSendPlan={setSendPlan} setShow={setShow} setWarning={setWarning} hide_wallet_option={true} />
-          ) : null}
-          {action === 'AddPhone' && !warning ? <AddPhone setShow={setDisplay} reload={processData} /> : null}
-          {warning ? (
-            <Warning
-              onPressD={async () => {
-                setWarning(false);
-                let reference_code = generateRandomString();
-                let data = {
-                  key: SAVING_TEST_KEY,
-                  email: userD.email,
-                  amount: 10000,
-                  reference_id: reference_code,
-                };
-                await storeData('link_data', data);
-                setShowModal(true);
-                setPayload(data);
-              }}
-              text={
-                'You will be redirected to paystack. You will be required to pay a sum of N100 to verify your card which will be deposited into the wallet.'
-              }
-              setWarning={setWarning}
+    <Container flex={1}>
+        <SizedBox height={5} />
+        <Container paddingHorizontal={20}>
+            <ImageWrap 
+                source={Logo}
+                height={30}
+                fit="contain"
             />
-          ) : null}
-          {action === 'AddBVN' && !warning ? <AddBVN setShow={setShow} reload={processData} /> : null}
         </Container>
-      </Modal>
-      {retry ? <Retry funcCall={processData} param={[]} /> : null}
-    </Page>
+        <Container backgroundColor={Colors.white} flex={1}
+            borderTopLeftRadius={50}
+            verticalAlignment="center"
+            borderTopRightRadius={50}
+        >
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <SizedBox height={5}/>
+                {/* <ImageWrap 
+                    height={30}
+                    source={UpgradePNG}
+                    fit="contain"
+                /> */}
+                <Container 
+                    paddingHorizontal={5} marginTop={4}
+                    //  horizontalAlignment="center"
+                >
+                    {/* <H1 fontSize={18} textAlign="center" >Savings </H1> */}
+                    <SizedBox height={2}/>
+                    <P textAlign="left">Dear {userD.first_name}!</P>
+                    <SizedBox height={2}/>
+
+                    <P textAlign="left">Guess what! Our Savings is on  the web now! We hope you're excited to experience all our amazing offerings! We've got you covered. High interest, Multiple saving options and No charges.
+Come take a look!</P>
+
+
+    
+                    <SizedBox height={5}/>
+
+                    <Container
+                     horizontalAlignment="center"
+
+                    >
+
+                    <Button title="Start Saving Now! " 
+                        textAlign="center"
+
+                        widthPercent="70%"
+                        backgroundColor={Colors.primary}
+                        borderColor={Colors.primary}
+                        onPress={()=>Linking.openURL('https://dashboard.herconomy.com/')}
+                    />
+
+</Container>
+
+                    <SizedBox height={5}/>
+                </Container>
+            </ScrollView>
+        </Container>
+    </Container>
+</Page>
   );
 };
 
